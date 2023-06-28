@@ -52,6 +52,7 @@
       directionsService = new google.maps.DirectionsService();
       directionsRenderer = new google.maps.DirectionsRenderer();
       directionsRenderer.setMap(map);
+      
     }
 
     function animateRoute(directions) {
@@ -133,6 +134,9 @@
             // Obtener el origen y el destino
             const origen = result.routes[0].legs[0].start_location;
             const destino = result.routes[0].legs[0].end_location;
+            
+            // Mostrar el contenedor del mapa
+			document.getElementById("showMap").style.display = "block";
 
 
             if(cotizacionStatus<1){
