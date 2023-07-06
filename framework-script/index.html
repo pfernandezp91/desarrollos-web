@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FrameworkScript</title>
+    <link rel="stylesheet" href="lib/bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <b-header site-title="FrameworkScript" site-logo="logo-2" title-show="none" text-color="#FFFFFF" bg-color="#444444">
+      <slot slot="menu"></slot>
+    </b-header>
+
+    <b-content>
+      <slot slot="superior">
+        <span>contenido superior</span>
+      </slot>
+      <slot slot="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1>Contenido principal</h1>
+              <p>Contenido adicional aquí</p>
+            </div>
+          </div>
+        </div>
+      </slot>
+      <slot slot="inferior">
+        <span>contenido inferior</span>
+      </slot>
+    </b-content>
+
+    <b-footer site-title="Nombre de aplicación" site-logo="2lineas" text-color="#FFFFFF" bg-color="#000000">
+      <slot slot="footer"></slot>
+    </b-footer>
+
+    <script src="lib/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+    <script src="components/js/main.js"></script>
+    <div slot="scripts">
+
+    </div>
+  </body>
+</html>
