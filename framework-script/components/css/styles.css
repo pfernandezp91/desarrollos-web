@@ -5,11 +5,19 @@ b-header {
     color: var(--text-color);
 }
 
+b-menu {
+    display: block;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+
 b-content {
     display: block;
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+
 
 /* Estilos personalizados para el componente b-footer */
 b-footer {

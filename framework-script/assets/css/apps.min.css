@@ -1,4 +1,60 @@
-@import url('../../lib/bootstrap/5.2.0/css/bootstrap.min.css');
-@import url('../../lib/font-awesome/css/all.min.css');
-@import url('../../lib/material-icons/all.min.css?family=Material+Icons');
 @import url('../../lib/fonts/Nunito/Nunito.css?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+body *{
+	opacity: 0;
+}
+body #loader,
+body #loader *{
+	opacity: 1;
+}
+html, 
+body {
+    height: 100%;
+}
+body.coddy-loaded * {
+	opacity: 1;
+}
+body {
+    min-height: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    color: #3B3B3B;
+}
+#loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	z-index: 9999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}  
+
+#loader-spinner {
+	width: 50px;
+	height: 50px;
+	border: 5px solid #ccc;
+	border-top-color: #333;
+	border-radius: 50%;
+	animation: spin 1s infinite linear;
+}
+[slot="menu"] {
+	position: relative;
+    display: flex;
+    width: 100%;
+}
+b-menu {
+	display: flex;
+    position: relative;
+    width: 100%;
+    flex-flow: nowrap;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

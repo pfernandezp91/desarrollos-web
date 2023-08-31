@@ -1,43 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <title>FrameworkScript</title>
-    <link rel="stylesheet" href="lib/bootstrap/5.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/apps.min.css">
   </head>
   <body>
-    <b-header site-title="FrameworkScript" site-logo="logo-2" title-show="none" text-color="#FFFFFF" bg-color="#444444">
-      <slot slot="menu"></slot>
+    <b-header site-title="FrameworkScript" site-logo="logo-2" title-show="none" text-color="#FFFFFF" bg-color="#444444" container-size="fluid">
+      <slot slot="menu">
+        <b-menu data='[
+                        {
+                          "text": "Home",
+                          "href": "#"
+                        },
+                        {
+                          "text": "Link",
+                          "href": "#"
+                        },
+                        {
+                          "text": "Dropdown",
+                          "children": [
+                            {
+                              "text": "Action",
+                              "href": "#"
+                            },
+                            {
+                              "text": "Another action",
+                              "href": "#"
+                            },
+                            {
+                              "text": "Something else here",
+                              "href": "#"
+                            }
+                          ]
+                        },
+                        {
+                          "text": "Disabled",
+                          "disabled": true
+                        }
+                      ]'>
+        </b-menu>
+      </slot>
     </b-header>
 
-    <b-content>
+    <b-content container-size="fluid">
       <slot slot="superior">
         <span>contenido superior</span>
       </slot>
-      <slot slot="content">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h1>Contenido principal</h1>
-              <p>Contenido adicional aquí</p>
-            </div>
-          </div>
-        </div>
+      <slot slot="content" >
+        <h1>Contenido principal</h1>
+        <p>Contenido adicional aquí</p>
       </slot>
       <slot slot="inferior">
         <span>contenido inferior</span>
       </slot>
     </b-content>
 
-    <b-footer site-title="Nombre de aplicación" site-logo="2lineas" text-color="#FFFFFF" bg-color="#000000">
+    <b-footer site-title="FrameworkScript" site-logo="logo-2" title-show="none" text-color="#FFFFFF" bg-color="#444444" container-size="fluid">
       <slot slot="footer"></slot>
     </b-footer>
 
-    <script src="lib/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
-    <script src="components/js/main.js"></script>
-    <div slot="scripts">
-
-    </div>
+    <script src="assets/js/apps.min.js"></script>
+    <slot slot="scripts">
+      <script>
+        console.log('Hola mundo');
+      </script>
+    </slot>
   </body>
 </html>
