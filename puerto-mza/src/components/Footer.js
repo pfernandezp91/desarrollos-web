@@ -5,9 +5,7 @@ const { Footer } = Layout;
 
 function AppFooter() {
   return (
-    <Footer style={{ textAlign: 'center' }}>
-      Derechos reservados ©2023
-    </Footer>
+    <Footer style={{ textAlign: 'center' }}></Footer>
   );
 }
 
