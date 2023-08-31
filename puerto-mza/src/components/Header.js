@@ -1,61 +1,78 @@
-import React from 'react';
-import { Row, Col, Layout, Menu } from 'antd';
+import { Col, Layout, Menu, Row } from 'antd';
+import React, { useState } from 'react';
 
 const { Header } = Layout;
 
+const menuSecundario = [
+    {
+        label: 'Opción 1',
+        key: '1',
+        style: { paddingTop: 10, paddingBottom: 10 }
+    },
+    {
+        label: 'Opción 2',
+        key: '2',
+        style: { paddingTop: 10, paddingBottom: 10 }
+    }
+];
+
+const menuPrimario = [
+    {
+        label: 'Opción 1',
+        key: '1'
+    },
+    {
+        label: 'Opción 2',
+        key: '2'
+    },
+    {
+        label: 'Opción 3',
+        key: '3'
+    },
+    {
+        label: 'Opción 4',
+        key: '4'
+    }
+];
+
 function AppHeader() {
-  return ( 
-    <Header style={{ padding: 0, background: 'transparent', height: 'auto' }}>
-        <Row style={{ background: '#0c231e', padding: '0 24px' }}>
-            {/* Icono */}
-            <Col span={8}>
-                <div className="logo" style={{ width: '50%', color: 'white', fontSize: '14px', lineHeight: 'initial', paddingTop: 10, paddingBottom: 10 }}>
-                    Icono
-                </div>
-            </Col>
+    const [current, setCurrent] = useState('opcion1');
 
-            {/* Menú secundario */}
-            <Col span={16}>
-                <Menu theme="transparent" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', lineHeight: 'initial', paddingTop: 10, paddingBottom: 10 }}>
-                    <Menu.Item key="1" style={{ color: 'white' }}>
-                        Opción 1
-                    </Menu.Item>
-                    <Menu.Item key="2" style={{ color: 'white' }}>
-                        Opción 2
-                    </Menu.Item>
-                    {/* Agrega más items de menú si lo deseas */}
-                </Menu>
-            </Col>
-        </Row>
-        <Row style={{ background: '#13322b', padding: '0 24px' }}>
-            {/* Logo */}
-            <Col span={8}>
-                <div className="logo" style={{ width: '50%', color: 'white', fontSize: '1.5em' }}>
-                    Sitio
-                </div>
-            </Col>
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+    };
 
-            {/* Menú primario */}
-            <Col span={16}>
-                <Menu theme="transparent" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', lineHeight: '64px' }}>
-                    <Menu.Item key="1" style={{ color: 'white' }}>
-                        Opción 1
-                    </Menu.Item>
-                    <Menu.Item key="2" style={{ color: 'white' }}>
-                        Opción 2
-                    </Menu.Item>
-                    <Menu.Item key="3" style={{ color: 'white' }}>
-                        Opción 3
-                    </Menu.Item>
-                    <Menu.Item key="4" style={{ color: 'white' }}>
-                        NOMBRE ADMINISTRADOR
-                    </Menu.Item>
-                    {/* Agrega más items de menú si lo deseas */}
-                </Menu>
-            </Col>
-        </Row>
-    </Header>
-  );
+    return ( 
+        <Header style={{ padding: 0, background: 'transparent', height: 'auto' }}>
+            <Row style={{ background: '#0c231e', padding: '0 24px' }}>
+                {/* Icono */}
+                <Col span={8}>
+                    <div className="logo" style={{ width: '50%', color: 'white', fontSize: '14px', lineHeight: 'initial', paddingTop: 10, paddingBottom: 10 }}>
+                        Icono
+                    </div>
+                </Col>
+
+                {/* Menú secundario */}
+                <Col span={16}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', lineHeight: 'initial', background: 'transparent' }} items={menuSecundario} selectedKeys={[]} />
+                </Col>
+            </Row>
+            <Row style={{ background: '#13322b', padding: '0 24px' }}>
+                {/* Logo */}
+                <Col span={8}>
+                    <div className="logo" style={{ width: '50%', color: 'white', fontSize: '1.5em' }}>
+                        Sitio
+                    </div>
+                </Col>
+
+                {/* Menú primario */}
+                <Col span={16}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', lineHeight: '64px', background: 'transparent' }} onClick={onClick} selectedKeys={[]} items={menuPrimario} />
+                </Col>
+            </Row>
+        </Header>
+    );
 }
 
 export default AppHeader;
