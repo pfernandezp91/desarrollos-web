@@ -1,14 +1,14 @@
 import React from 'react';
 import { Layout } from 'antd';
 
-const { Footer: AntFooter } = Layout;
+const { Footer } = Layout;
 
-function Footer() {
+function AppFooter() {
   return (
-    <AntFooter style={{ textAlign: 'center' }}>
-      Puerto Inteligente ©2023
-    </AntFooter>
+    <Footer style={{ textAlign: 'center' }}>
+      Derechos reservados ©2023
+    </Footer>
   );
 }
 
-export default Footer;
+export default AppFooter;
