@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout } from 'antd';
+import { Row, Col, Layout, Menu } from 'antd';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
@@ -27,10 +27,12 @@ function App() {
         {loading ? <Loader /> : 
             <Content className="content" style={{ padding: '0 50px', margin: '50px 0' }}>
             {/* Contenido principal de la aplicación */}
-            <div>
-                <h2>Inicio</h2>
-                <p>¡Bienvenido a mi aplicación!</p>
-            </div>
+            <Row>
+                <div>
+                    <h2>Inicio</h2>
+                    <p>¡Bienvenido a mi aplicación!</p>
+                </div>
+            </Row>
           </Content>
         }
       <Footer />
