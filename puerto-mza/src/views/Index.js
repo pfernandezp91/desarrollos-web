@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 
 const { Content } = Layout;
 
-function App() {
+function Home() {
   const [loading, setLoading] = useState(true);
 
   const [iframeHeight, setIframeHeight] = useState(0);
@@ -33,7 +33,7 @@ function App() {
       <Header />
         {loading ? <Loader /> : 
           <div className='container'>
-            <Content className="content" style={{ padding: '0 50px', margin: '50px 0' }}>
+            <Content className="content" style={{ margin: '50px 0' }}>
               {/* Contenido principal de la aplicación */}
               <Row>
                 <Col span={8} style={{ textAlign: 'center', marginBottom: 20 }}>
@@ -61,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

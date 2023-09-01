@@ -1,14 +1,38 @@
 import React from 'react';
-import Home from './views/Home';
-// Importa otras vistas si las tienes
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-    return (
-        <div className="App">
-            {/* Aquí puedes agregar una lógica de enrutamiento si estás usando React Router */}
-            <Home />
-        </div>
-    );
+  const viewsContext = require.context('./views', true, /\.js$/);
+
+  const routes = viewsContext.keys().map((modulePath) => {
+    const path = modulePath.replace(/^\.\/|\.js$/g, '');
+    const component = viewsContext(modulePath).default;
+
+    // Si es Index, asignamos la ruta raíz
+    if (path === 'Index') {
+      return { path: '', component };
+    }
+
+    // Si es Error404, asignamos la ruta comodín
+    if (path === 'Error404') {
+      return { path: '*', component };
+    }
+
+    // Si es otra ruta, asignamos la ruta correspondiente
+    return { path, component };
+  });
+
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={`/${route.path}`} element={<route.component />} />
+          ))}
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
