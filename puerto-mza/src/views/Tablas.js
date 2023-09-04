@@ -1,4 +1,4 @@
-import { Button, Col, Layout, Row, Table } from 'antd';
+import { Button, Col, Layout, Row, Table, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import { EditOutlined, MenuOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -90,11 +90,11 @@ function App() {
       dataIndex: 'acciones',
       key: 'acciones',
       render: () => (
-        <>
-          <Button type="primary" icon={<EditOutlined />} size={size}  danger />
-          <Button type="primary" icon={<MenuOutlined />} size={size} />
+        <Space wrap>
+          <Button className='warning-button' type="primary" icon={<EditOutlined />} size={size} />
+          <Button type="primary" icon={<MenuOutlined />} size={size}/>
           <Button type="primary" icon={<DeleteOutlined />} size={size} danger />
-        </>
+        </Space>
       ),
     },
   ];
@@ -104,7 +104,7 @@ function App() {
       <Header />
         {loading ? <Loader /> : 
           <div className='container'>
-            <Content className="content" style={{ padding: '0 50px', margin: '50px 0' }}>
+            <Content className="content" style={{ margin: '50px 0' }}>
               {/* Contenido principal de la aplicación */}
               <Row>
                 <Col span={24} style={{ textAlign: 'center', marginBottom: 20 }}>

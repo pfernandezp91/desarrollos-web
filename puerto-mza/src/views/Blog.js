@@ -119,7 +119,7 @@ function Blog() {
                           <Col span={20}>
                             <div className="d-flex align-items-center me-3">
                               <div className="text-muted d-flex align-items-center">
-                                <span className='mr-2'>{item.tipoNota} |</span>
+                                <span className='me-2'>{item.tipoNota} |</span>
                                 <span className='ms-auto'>{formatearFecha(item.fecha)}</span>
                               </div>
                             </div>
@@ -131,7 +131,7 @@ function Blog() {
                                 const urlToCopy = window.location.origin + '/blog/post/' + item.id;
                                 copyToClipboard(urlToCopy);
                               }}>
-                                <ShareAltOutlined className="me-1" style={{ fontSize: 24 }}/>
+                                <ShareAltOutlined className="me-1" style={{ fontSize: 24, float: 'right' }}/>
                               </a>
                             </div>
                           </Col>
@@ -149,7 +149,7 @@ function Blog() {
                     ))}
                   </Col>
                   <Col span={8} className='px-4'>
-                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 80 }}>
+                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                       <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
                           <a className='text-dark text-decoration-none d-block' href="/blog" onClick={(e) => {
                             e.preventDefault();

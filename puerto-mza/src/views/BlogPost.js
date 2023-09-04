@@ -143,7 +143,7 @@ function BlogPost() {
                     </div>
                   </Col>
                   <Col span={8} className='px-4'>
-                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 80 }}>
+                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                       <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
                           <a className='text-dark text-decoration-none d-block' href={'/blog?category=Todas'}>
                             <span>Todas</span>

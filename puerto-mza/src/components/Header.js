@@ -1,105 +1,70 @@
-import React, { useState } from 'react';
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { DownOutlined } from '@ant-design/icons';
-import { Col, Dropdown, Layout, Menu, Row } from 'antd';
+import React from 'react';
+import { HomeOutlined, AppstoreOutlined, SwapOutlined } from '@ant-design/icons';
+
+import { Col, Dropdown, Layout, Menu, Row, Typography } from 'antd';
+import { Link } from 'react-router-dom';
+
+const { Text } = Typography;
 
 
-const { Header, Content } = Layout;
-
-// const menuPrimario = [
-//     {
-//         label: 'Opción 1',
-//         key: '1',
-//         to: '/',
-//     },
-//     {
-//         label: 'Opción 2',
-//         key: '2',
-//         to: '/',
-//     },
-//     {
-//         label: 'Opción 3',
-//         key: '3',
-//         to: '/',
-//     },
-//     {
-//         label: 'Opción 4',
-//         key: '4',
-//         to: '/',
-//     }
-// ];
+const { Header } = Layout;
 
 function AppHeader() {
 
-    const menu = (
+    const cambioPuertoMenu = (
         <Menu>
-          <Menu.Item key="1">Acción</Menu.Item>
-          <Menu.Item key="2">Otra acción</Menu.Item>
+          <Menu.Item key="1">MANZANILLO</Menu.Item>
+        </Menu>
+      );
+    
+      const userMenu = (
+        <Menu>
+          <Menu.Item key="1">Cambiar Contraseña</Menu.Item>
           <Menu.Divider />
-          <Menu.Item key="3">Algo más aquí</Menu.Item>
+          <Menu.Item key="2">Salir</Menu.Item>
         </Menu>
       );
 
-    const [current, setCurrent] = useState('1');
-
-    const onClick = (e) => {
-        console.log('click ', e);
-        setCurrent(e.key);
-
-    };
-
     return (
-        <Header className="mt-0" style={{ backgroundColor: '#13322b', height: 'auto' }}>
+        <Header className="position-sticky mt-0" style={{ backgroundColor: '#13322b', height: 'auto', zIndex: 1000, top: 58 }}>
             <div className='container'>
                 <Row style={{ background: '#13322b' }}>
                     <Col span={8}>
-                        <a className="navbar-brand" href="/" style={{ width: '50%', color: 'white', fontSize: '1.5em' }}>
-                        Manzanillo
-                        </a>
+                        <Link className='text-decoration-none d-flex align-items-center' to="/">
+                            <span className='my-auto'>
+                                <img className='me-2' src="/assets/img/logoAPI.png" height="32" width="32" alt="Logo Puerto Inteligente Seguro" />
+                                <Text className="ant-logo-text text-light" style={{ fontSize: '1.5em' }}>MANZANILLO</Text>
+                            </span>
+                        </Link>
                     </Col>
                     <Col span={16}>
-                        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', background: 'transparent' }} selectedKeys={[]}>
-                            <Menu.Item key="enlace1">Enlace</Menu.Item>
-                            <Dropdown overlay={menu} placement="bottomLeft">
-                            <a className="ant-dropdown-link" href="/" onClick={(e) => e.preventDefault()}>
-                                Desplegable <DownOutlined />
-                            </a>
-                            </Dropdown>
-                            <Menu.Item key="enlace2">Enlace</Menu.Item>
+                        <Menu theme="dark" mode="horizontal" style={{ width: '100%', display: 'flex', justifyContent: 'end', background: 'transparent' }} selectedKeys={[]}> 
+                            <Menu.Item key="inicio" icon={<HomeOutlined />}>
+                                Inicio
+                            </Menu.Item>
+                            <Menu.Item key="panel" icon={<AppstoreOutlined />}>
+                                Panel
+                            </Menu.Item>
+                            <Menu.Item key="cambiarPuerto">
+                                <Dropdown overlay={cambioPuertoMenu} trigger={['click']}>
+                                    <a className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
+                                        <SwapOutlined /> Cambiar puerto <span className="caret"></span>
+                                    </a>
+                                </Dropdown>
+                            </Menu.Item>
+                            <Menu.Item key="user">
+                                <Dropdown overlay={userMenu} trigger={['click']}>
+                                    <a className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
+                                        NOMBRE COMPLETO USUARIO <span className="caret"></span>
+                                    </a>
+                                </Dropdown>
+                            </Menu.Item>
                         </Menu>
                     </Col>
                 </Row>
             </div>
         </Header>
     );
-
-    // return ( 
-    //     <Router>
-    //         <Layout>
-    //             <Header style={{ padding: 0, background: 'transparent', height: 'auto' }}>
-    //                 <Row style={{ background: '#13322b', padding: '0 24px' }}>
-    //                     {/* Logo */}
-    //                     <Col span={8}>
-    //                         <div className="logo" style={{ width: '50%', color: 'white', fontSize: '1.5em' }}>
-    //                             Sitio
-    //                         </div>
-    //                     </Col>
-
-    //                     {/* Menú primario */}
-    //                     <Col span={16}>
-    //                         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ width: '100%', display: 'flex', justifyContent: 'end', background: 'transparent' }} selectedKeys={[]}>
-    //                             {menuPrimario.map(option => (
-    //                                 <Menu.Item key={option.key} style={{ lineHeight: '64px' }}>
-    //                                     <Link to={option.to}>{option.label}</Link>
-    //                                 </Menu.Item>
-    //                             ))}
-    //                         </Menu>
-    //                     </Col>
-    //                 </Row>
-    //             </Header>
-    //         </Layout>
-    //     </Router>
-    // );
 }
 
 export default AppHeader;
