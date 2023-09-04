@@ -89,7 +89,7 @@ function Blog() {
       {/* <Header /> */}
         <>
           <section className="text-light bg-dark position-relative overflow-hidden">
-            <div className="container position-relative py-5" style={{ zIndex: 1 }}>
+            <div className="container position-relative py-3" style={{ zIndex: 1 }}>
               <Row>
                 <Col offset={4} span={16} className="text-center">
                   <h1 className="display-4">
