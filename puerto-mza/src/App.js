@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 function App() {
   const viewsContext = require.context('./views', true, /\.js$/);
@@ -13,6 +13,16 @@ function App() {
       return { path: '', component };
     }
 
+    // Si es un post individual del blog, asignamos la ruta con el ID
+    if (path === 'BlogPost') {
+      return { path: 'Blog/post/:id', component };
+    }
+
+    // Si es Blog, asignamos la ruta raíz
+    if (path === 'Blog') {
+      return { path: 'Blog', component };
+    }
+    
     // Si es Error404, asignamos la ruta comodín
     if (path === 'Error404') {
       return { path: '*', component };
@@ -21,6 +31,8 @@ function App() {
     // Si es otra ruta, asignamos la ruta correspondiente
     return { path, component };
   });
+
+  console.log(routes);
 
   return (
     <Router>
