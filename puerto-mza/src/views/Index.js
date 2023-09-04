@@ -1,7 +1,7 @@
 import { Col, Image, Layout, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Header from '../components/Header';
+// import Footer from '../components/Footer';
 import Loader from '../components/Loader';
 
 const { Content } = Layout;
@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <Layout className="layout">
-      <Header />
+      {/* <Header /> */}
         {loading ? <Loader /> : 
           <div className='container'>
             <Content className="content" style={{ margin: '50px 0' }}>
@@ -38,7 +38,7 @@ function Home() {
             </Content>
           </div>
         }
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 }

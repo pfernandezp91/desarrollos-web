@@ -1,7 +1,7 @@
 import { Col, Layout, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Header from '../components/Header';
+// import Footer from '../components/Footer';
 import Loader from '../components/Loader';
 
 const { Content } = Layout;
@@ -22,7 +22,7 @@ function Error404() {
 
   return (
     <Layout className="layout">
-      <Header />
+      {/* <Header /> */}
         {loading ? <Loader /> : 
           <div className='container'>
             <Content className="content" style={{ padding: '0 50px', margin: '50px 0' }}>
@@ -35,7 +35,7 @@ function Error404() {
             </Content>
           </div>
         }
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 }

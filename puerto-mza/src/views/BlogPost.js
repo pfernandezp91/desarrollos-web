@@ -5,8 +5,8 @@ import { Button, Card, Col, Layout, List, Row, Tag } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+// import Footer from '../components/Footer';
+// import Header from '../components/Header';
 import Loader from '../components/Loader';
 import './blog.css';
 
@@ -78,7 +78,7 @@ function BlogPost() {
 
   return (
     <Layout className="layout">
-      <Header />
+      {/* <Header /> */}
         <>
           <section className="pt-2 mb-5">
             <div className="container">
@@ -150,7 +150,7 @@ function BlogPost() {
             </div>
           </section>
         </>
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 }

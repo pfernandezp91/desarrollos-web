@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 import { EditOutlined, MenuOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Header from '../components/Header';
+// import Footer from '../components/Footer';
 import Loader from '../components/Loader';
 
 const { Content } = Layout;
@@ -92,7 +92,7 @@ function Tablas() {
 
   return (
     <Layout className="layout" style={{ backgroundColor: 'transparent' }}>
-      <Header />
+      {/* <Header /> */}
         {loading ? <Loader /> : 
           <div className='container'>
             <Content className="content" style={{ margin: '50px 0' }}>
@@ -105,7 +105,7 @@ function Tablas() {
             </Content>
           </div>
         }
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 }

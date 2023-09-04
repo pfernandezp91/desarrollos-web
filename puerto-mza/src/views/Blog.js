@@ -6,8 +6,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DividerVector from '../components/DividerVector';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+// import Footer from '../components/Footer';
+// import Header from '../components/Header';
 import Loader from '../components/Loader';
 import './blog.css';
 const { Content } = Layout;
@@ -86,7 +86,7 @@ function Blog() {
   
   return (
     <Layout className="layout">
-      <Header />
+      {/* <Header /> */}
         <>
           <section className="text-light bg-dark position-relative overflow-hidden">
             <div className="container position-relative py-5" style={{ zIndex: 1 }}>
@@ -143,7 +143,7 @@ function Blog() {
                           <h3 className="h4">
                               <a className='text-dark text-decoration-none' href={'/blog/post/' + item.id}>{item.titulo_pagina}</a>
                           </h3>
-                          <hr className='hr-border my-4'/>
+                          <hr className='hr-border'/>
                           <p className="mb-4">{trimText(item.contenido)}</p>
                       </Card>
                     ))}
@@ -188,7 +188,7 @@ function Blog() {
             </div>
           }
         </>
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 }
