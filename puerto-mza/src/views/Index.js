@@ -9,14 +9,6 @@ const { Content } = Layout;
 function Home() {
   const [loading, setLoading] = useState(true);
 
-  const [iframeHeight, setIframeHeight] = useState(0);
-
-  const handleIframeHeightChange = (newHeight) => {
-    if (newHeight !== iframeHeight) {
-      setIframeHeight(newHeight);
-    }
-  };
-
   useEffect(() => {
     fetchData();
   }, []);

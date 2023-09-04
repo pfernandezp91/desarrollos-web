@@ -1,4 +1,4 @@
-import { Col, Image, Layout, Row } from 'antd';
+import { Col, Layout, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -6,16 +6,8 @@ import Loader from '../components/Loader';
 
 const { Content } = Layout;
 
-function Home() {
+function Error404() {
   const [loading, setLoading] = useState(true);
-
-  const [iframeHeight, setIframeHeight] = useState(0);
-
-  const handleIframeHeightChange = (newHeight) => {
-    if (newHeight !== iframeHeight) {
-      setIframeHeight(newHeight);
-    }
-  };
 
   useEffect(() => {
     fetchData();
@@ -48,4 +40,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Error404;

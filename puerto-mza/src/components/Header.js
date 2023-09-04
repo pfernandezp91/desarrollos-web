@@ -47,14 +47,14 @@ function AppHeader() {
                             </Menu.Item>
                             <Menu.Item key="cambiarPuerto">
                                 <Dropdown overlay={cambioPuertoMenu} trigger={['click']}>
-                                    <a className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
+                                    <a href='/' className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
                                         <SwapOutlined /> Cambiar puerto <span className="caret"></span>
                                     </a>
                                 </Dropdown>
                             </Menu.Item>
                             <Menu.Item key="user">
                                 <Dropdown overlay={userMenu} trigger={['click']}>
-                                    <a className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
+                                    <a href='/' className="ant-dropdown-link text-decoration-none" onClick={e => e.preventDefault()}>
                                         NOMBRE COMPLETO USUARIO <span className="caret"></span>
                                     </a>
                                 </Dropdown>

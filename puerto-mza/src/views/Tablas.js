@@ -9,17 +9,8 @@ import Loader from '../components/Loader';
 
 const { Content } = Layout;
 
-function App() {
-  const [size, setSize] = useState('large');
+function Tablas() {
   const [loading, setLoading] = useState(true);
-
-  const [iframeHeight, setIframeHeight] = useState(0);
-
-  const handleIframeHeightChange = (newHeight) => {
-    if (newHeight !== iframeHeight) {
-      setIframeHeight(newHeight);
-    }
-  };
 
   useEffect(() => {
     fetchData();
@@ -91,9 +82,9 @@ function App() {
       key: 'acciones',
       render: () => (
         <Space wrap>
-          <Button className='warning-button' type="primary" icon={<EditOutlined />} size={size} />
-          <Button type="primary" icon={<MenuOutlined />} size={size}/>
-          <Button type="primary" icon={<DeleteOutlined />} size={size} danger />
+          <Button className='warning-button' type="primary" icon={<EditOutlined />} />
+          <Button type="primary" icon={<MenuOutlined />} />
+          <Button type="primary" icon={<DeleteOutlined />} danger />
         </Space>
       ),
     },
@@ -119,4 +110,4 @@ function App() {
   );
 }
 
-export default App;
+export default Tablas;

@@ -16,19 +16,6 @@ function formatearFecha(fecha) {
   return fecha.split('/').map(part => part.length === 1 ? '0' + part : part).join('/');
 }
 
-function trimText(htmlString) {
-  const dummyElement = document.createElement('div');
-  dummyElement.innerHTML = htmlString;
-  
-  let texto = dummyElement.textContent || dummyElement.innerText || "";
-
-  if (texto.length > 250) {
-    texto = texto.substr(0, 250) + '...';
-  }
-
-  return texto;
-}
-
 function BlogPost() {
   const [dataBlog, setData] = useState([]);
   const [dataCategorias, setDataCategorias] = useState([]);
