@@ -107,7 +107,7 @@ function BlogPost() {
                           <h2 className="display-5 text-center">{postSeleccionado.titulo_pagina}</h2>
                           <div className="d-flex align-items-center me-3">
                             <div className="text-muted mx-auto mt-4">
-                              <span className='mr-2'>{postSeleccionado.tipoNota} |</span>
+                              <span className='me-2'>{postSeleccionado.tipoNota} |</span>
                               <span className='ms-auto'>{formatearFecha(postSeleccionado.fecha)}</span>
                             </div>
                           </div>
