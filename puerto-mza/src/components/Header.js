@@ -33,7 +33,7 @@ function AppHeader() {
                         <Link className='text-decoration-none d-flex align-items-center' to="/">
                             <span className='my-auto'>
                                 <img className='me-2' src="/assets/img/logoAPI.png" height="32" width="32" alt="Logo Puerto Inteligente Seguro" />
-                                <Text className="ant-logo-text text-light" style={{ fontSize: '1.5em' }}>MANZANILLO</Text>
+                                <Text className="ant-logo-text text-light" style={{ fontSize: '1.5em', fontWeight: 300 }}>MANZANILLO</Text>
                             </span>
                         </Link>
                     </Col>

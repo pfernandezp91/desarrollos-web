@@ -125,24 +125,24 @@ function BlogPost() {
               <Content className="content" style={{ marginBottom: 50 }}>
                 {/* Contenido principal de la aplicación */}
                 <Row>
-                  <Col span={16} className="px-4">
+                  <Col xs={{ span: 24 }} md={{ span: 16 }} className="px-4">
                     <div dangerouslySetInnerHTML={{ __html: postSeleccionado.contenido }} />
                     <hr/>
                     <div className="d-flex justify-content-center">
-                      <Button type="link" disabled={!isFirstElement} onClick={handlePreviousClick}>
+                      <Button type="link" disabled={!isFirstElement} onClick={handlePreviousClick} style={{ height: 'auto' }}>
                         <ArrowLeftOutlined className="h4" />
                       </Button>
                             
-                      <Button id="volver_inicio" type="link" href="/blog">
+                      <Button id="volver_inicio" type="link" href="/blog" style={{ height: 'auto' }}>
                         <HomeOutlined className="h4"/>
                       </Button>
                             
-                      <Button type="link" disabled={!isLastElement} onClick={handleNextClick}>
+                      <Button type="link" disabled={!isLastElement} onClick={handleNextClick} style={{ height: 'auto' }}>
                         <ArrowRightOutlined className="h4" />
                       </Button>
                     </div>
                   </Col>
-                  <Col span={8} className='px-4'>
+                  <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                     <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                       <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
                           <a className='text-dark text-decoration-none d-block' href={'/blog?category=Todas'}>

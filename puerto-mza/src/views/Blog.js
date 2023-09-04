@@ -112,7 +112,7 @@ function Blog() {
               <Content className="content" style={{ margin: '50px 0' }}>
                 {/* Contenido principal de la aplicación */}
                 <Row>
-                  <Col span={16} className="px-4">
+                  <Col xs={{ span: 24 }} md={{ span: 16 }} className="px-4">
                     {filteredBlogData.map(item => (
                       <Card className="shadow mb-5" bodyStyle={{ padding: '24px' }} key={item.id} cover={null} actions={[
                         <Row className='px-4 d-flex justify-content-center' style={{ cursor: 'initial' }}>
@@ -148,7 +148,7 @@ function Blog() {
                       </Card>
                     ))}
                   </Col>
-                  <Col span={8} className='px-4'>
+                  <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                     <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                       <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
                           <a className='text-dark text-decoration-none d-block' href="/blog" onClick={(e) => {

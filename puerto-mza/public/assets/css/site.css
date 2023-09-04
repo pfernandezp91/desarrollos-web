@@ -97,6 +97,11 @@ body {
     margin-left: auto!important;
 }
 
+.my-4 {
+    margin-top: 1.5rem!important;
+    margin-bottom: 1.5rem!important;
+}
+
 .my-auto {
     margin-top: auto!important;
     margin-bottom: auto!important;
@@ -124,6 +129,10 @@ body {
 
 .me-2 {
     margin-right: 0.5rem!important;
+}
+
+.hr-border {
+    overflow: initial;
 }
 
 .hr-border:after {
