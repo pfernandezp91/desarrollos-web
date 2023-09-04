@@ -104,7 +104,7 @@ function Blog() {
             </div>
             <DividerVector />
             <div className="d-flex align-items-center bg-dark" style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 0 }} >
-                <img src="/assets/img/hamburg-3763443_1280.jpg" alt="" className="opacity-50" style={{ objectFit: "cover", objectPosition: "50% 50%", maxWidth: "none", position: "absolute", left: 0, mixBlendMode: "color-dodge" }} />
+                <img src="/assets/img/hamburg-3763443_1280.jpg" alt="" className="opacity-50" style={{ objectFit: "cover", objectPosition: "50% 50%", maxWidth: "none", width: '100%', position: "absolute", left: 0, mixBlendMode: "color-dodge" }} />
             </div>
           </section>
           <section>
