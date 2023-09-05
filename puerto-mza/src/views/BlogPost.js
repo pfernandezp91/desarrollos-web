@@ -5,6 +5,7 @@ import { Button, Card, Col, Layout, List, Row, Tag } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import config  from '../utils/config';
 // import Footer from '../components/Footer';
 // import Header from '../components/Header';
 import Loader from '../components/Loader';
@@ -37,6 +38,8 @@ function BlogPost() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   var copyToken = getCurrentToken();
+  const imagePath = `${config.basename}/assets/img/hamburg-3763443_1280.jpg`;
+  const apiToken = `${config.apiBaseUrl}`;
 
   useEffect(() => {
     if (token !== null) {
@@ -45,7 +48,7 @@ function BlogPost() {
 
     var newToken = getCurrentToken();
 
-    axios.get('/assets/api/token.php', {
+    axios.get(`${apiToken}/token.php`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + newToken
@@ -60,25 +63,25 @@ function BlogPost() {
       setLoading(false);
     });
 
-    axios.get('/assets/api/blog.php')
-      .then(response => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+    axios.get(`${apiToken}/src/server/blog.php`)
+    .then(response => {
+      setData(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
 
-    axios.get('/assets/api/blog_categorias.php')
-      .then(response => {
-        setDataCategorias(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+    axios.get(`${apiToken}/src/server/blog_categorias.php`)
+    .then(response => {
+      setDataCategorias(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
   }, [token]);
 
   var AccessSuccessful = false

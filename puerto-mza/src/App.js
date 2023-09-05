@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import config  from './utils/config';
 
 function App() {
   const viewsContext = require.context('./views', true, /\.js$/);
@@ -32,10 +33,8 @@ function App() {
     return { path, component };
   });
 
-  console.log(routes);
-
   return (
-    <Router basename='/PISblog'>
+    <Router basename={config.basename}>
       <div className="App">
         <Routes>
           {routes.map((route, index) => (

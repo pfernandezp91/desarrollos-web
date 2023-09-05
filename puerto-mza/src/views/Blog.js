@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DividerVector from '../components/DividerVector';
+import config  from '../utils/config';
 // import Fetch from '../libraries/Fetch';
 // import Footer from '../components/Footer';
 // import Header from '../components/Header';
@@ -47,6 +48,8 @@ function Blog() {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(category ? category : 'Todas');
   var copyToken = getCurrentToken();
+  const imagePath = `${config.basename}/assets/img/hamburg-3763443_1280.jpg`;
+  const apiToken = `${config.apiBaseUrl}`;
 
   useEffect(() => {
     if (token !== null) {
@@ -55,7 +58,7 @@ function Blog() {
 
     var newToken = getCurrentToken();
 
-    axios.get('/assets/api/token.php', {
+    axios.get(`${apiToken}/token.php`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + newToken
@@ -70,7 +73,7 @@ function Blog() {
       setLoading(false);
     });
 
-    axios.get('/assets/api/blog.php')
+    axios.get(`${apiToken}/src/server/blog.php`)
     .then(response => {
       setData(response.data);
       setLoading(false);
@@ -80,7 +83,7 @@ function Blog() {
       setLoading(false);
     });
 
-    axios.get('/assets/api/blog_categorias.php')
+    axios.get(`${apiToken}/src/server/blog_categorias.php`)
     .then(response => {
       setDataCategorias(response.data);
       setLoading(false);
@@ -149,7 +152,7 @@ function Blog() {
             </div>
             <DividerVector />
             <div className="d-flex align-items-center bg-dark" style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 0 }} >
-                <img src="/assets/img/hamburg-3763443_1280.jpg" alt="" className="opacity-50" style={{ objectFit: "cover", objectPosition: "50% 50%", maxWidth: "none", width: '100%', position: "absolute", left: 0, mixBlendMode: "color-dodge" }} />
+                <img src={imagePath} alt="" className="opacity-50" style={{ objectFit: "cover", objectPosition: "50% 50%", maxWidth: "none", width: '100%', position: "absolute", left: 0, mixBlendMode: "color-dodge" }} />
             </div>
           </section>
           <section>
