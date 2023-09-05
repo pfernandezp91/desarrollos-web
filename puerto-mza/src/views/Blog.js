@@ -1,14 +1,17 @@
 import {
   ShareAltOutlined
 } from '@ant-design/icons';
-import { Card, Col, Layout, List, Row, Tag } from 'antd';
+import { Button, Card, Col, Layout, List, Row, Tag } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DividerVector from '../components/DividerVector';
+// import Fetch from '../libraries/Fetch';
 // import Footer from '../components/Footer';
 // import Header from '../components/Header';
 import Loader from '../components/Loader';
+import { getCurrentToken, saveToken } from "../utils/LocalStorage";
+
 import './blog.css';
 const { Content } = Layout;
 
@@ -29,38 +32,76 @@ function trimText(htmlString) {
   return texto;
 }
 
+// const miToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp2YWxlbnp1ZWxhMUB1Y29sLm14IiwiaWRVc3UiOiIzOTE4IiwiaWRBcHAiOiIxNDAiLCJub21BcHAiOiJQSVMgQmxvZyIsImlkUm9sIjoiNiIsImlkUm9sQXBwIjoiMSIsImlkUGVyc29uYSI6IjMyMTEyIiwiaWRFbXByZXNhIjoiODUiLCJpZENvbnRyYXRvIjoiMSIsImlkQVBJIjoiNyIsImF1dG9yaWRhZCI6IjEiLCJodXNvIjoiQW1lcmljYS9NZXhpY29fQ2l0eSIsImh1c28yIjoiNiIsIm5iZiI6MTY5MzU4Mzg1NywiZXhwIjoxNjkzNjEyNjU3LCJpYXQiOjE2OTM1ODM4NTcsImlzcyI6IlBJUyIsImF1ZCI6IkFQSU1BTiJ9.7wV5HnrF3B6H1L-zapAimCq3vnwXvzWJWzcFAoAM5sM';
+
 function Blog() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
+  const token = queryParams.get('token');
   const [copied, setCopied] = useState(false);
+  const [accessToken, setAccessToken] = useState(null);
   const [dataBlog, setData] = useState([]);
   const [dataCategorias, setDataCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(category ? category : 'Todas');
+  var copyToken = getCurrentToken();
 
   useEffect(() => {
+    if (token !== null) {
+      saveToken(token);
+    }
+
+    var newToken = getCurrentToken();
+
+    axios.get('/assets/api/token.php', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + newToken
+      }
+    })
+    .then(response => {
+      setAccessToken(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
+
     axios.get('/assets/api/blog.php')
-      .then(response => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+    .then(response => {
+      setData(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
 
     axios.get('/assets/api/blog_categorias.php')
-      .then(response => {
-        setDataCategorias(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
+    .then(response => {
+      setDataCategorias(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
+  }, [token]);
+
+  var AccessSuccessful = false
+  if(
+    (accessToken !== null && accessToken.acceso && accessToken.token.idRolApp === '1' && accessToken.token.idApp === '140') 
+    || 
+    (accessToken !== null && accessToken.acceso && accessToken.token.idRolApp === '2' && accessToken.token.idApp === '140')
+  ) {
+      AccessSuccessful = true;
+  }
+
+  console.log(AccessSuccessful)
+  // if(accessToken) console.log(accessToken)
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
@@ -92,13 +133,17 @@ function Blog() {
             <div className="container position-relative py-3" style={{ zIndex: 1 }}>
               <Row>
                 <Col offset={4} span={16} className="text-center">
-                  <h1 className="display-4">
+                  <h1 className="display-4 mb-4">
                     <span className="titulo d-flex justify-content-center">
                       <span className="titulo_text_PIS">PIS</span>
                       <span className="titulo_text_Blog">Blog</span>
                     </span>
                   </h1>
-                  <p className="lead mb-0">El blog oficial del equipo del Puerto Inteligente Seguro brinda información sobre las nuevas funciones, mejoras y actualización del sistema y módulos.</p>
+                  <p className="mb-0" style={{ fontWeight: 300 }}>
+                    El PISBlog es el espacio oficial donde nos dedicamos a mantener informado al usuario, acerca de nuestras actualizaciones y desarrollos que constantemente implementamos en el Sistema del Puerto Inteligente Seguro.<br/><br/>
+                    El Puerto Inteligente Seguro es una plataforma integral que ha transformado la manera en que las Administraciones del Sistema Portuario Nacional, gestionan y optimizan sus operaciones en el país.
+                    En nuestro compromiso constante con la innovación y la excelencia, nos complace informar y compartir las últimas novedades que hemos incorporado para mejorar la eficiencia, la seguridad, y la rentabilidad de los puertos de todo el territorio nacional.
+                  </p>
                 </Col>
               </Row>
             </div>
@@ -126,13 +171,13 @@ function Blog() {
                           </Col>
                           <Col span={4}>
                             <div className="d-flex align-items-center justify-content-end">
-                              <a href={'/blog/post/' + item.id} onClick={(e) => {
-                                e.preventDefault();
-                                const urlToCopy = window.location.origin + '/blog/post/' + item.id;
-                                copyToClipboard(urlToCopy);
-                              }}>
+                              <Link type='link' to={'/blog/post/' + item.id} onClick={(e) => {
+                                  e.preventDefault();
+                                  const urlToCopy = window.location.origin + '/blog/post/' + item.id;
+                                  copyToClipboard(urlToCopy);
+                                }}>
                                 <ShareAltOutlined className="me-1" style={{ fontSize: 24, float: 'right' }}/>
-                              </a>
+                                </Link>
                             </div>
                           </Col>
                         </Row>
@@ -141,7 +186,9 @@ function Blog() {
                               <Tag className='shadow shadow-danger' color="danger" style={{ backgroundColor: '#ef4444' }}>{item.categoria}</Tag>
                           </div>
                           <h3 className="h4">
-                              <a className='text-dark text-decoration-none' href={'/blog/post/' + item.id}>{item.titulo_pagina}</a>
+                            <Link className='text-dark text-decoration-none' type='link' to={'/blog/post/' + item.id}>
+                              {item.titulo_pagina}
+                            </Link>
                           </h3>
                           <hr className='hr-border'/>
                           <p className="mb-4">{trimText(item.contenido)}</p>
@@ -149,26 +196,33 @@ function Blog() {
                     ))}
                   </Col>
                   <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
-                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
-                      <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                          <a className='text-dark text-decoration-none d-block' href="/blog" onClick={(e) => {
-                            e.preventDefault();
-                            handleCategoryClick('Todas');
-                          }}>
-                            <span>Todas</span>
-                          </a>
-                      </List.Item>
-                      <List dataSource={dataCategorias} renderItem={item => (
+                    <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
+                      {AccessSuccessful && (
+                        <Link to={ window.location.origin + '/admin/src/views/?token=' + copyToken } target="_blank" rel="noopener noreferrer">
+                          <Button className='w-100 mb-4' type='primary'>Administración</Button>
+                        </Link>
+                      )}
+                      <Card className='shadow' title="Categorías">
                         <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                          <a className='text-dark text-decoration-none d-block' href="/blog" onClick={(e) => {
-                            e.preventDefault();
-                            handleCategoryClick(item.nombre_categoria);
-                          }}>
-                            <span>{item.nombre_categoria}</span>
-                          </a>
+                          <Link className='text-dark text-decoration-none d-block' type='link' onClick={(e) => {
+                              e.preventDefault();
+                              handleCategoryClick('Todas');
+                            }}>
+                              <span>Todas</span>
+                          </Link>
                         </List.Item>
-                      )}/>
-                    </Card>
+                        <List dataSource={dataCategorias} renderItem={item => (
+                          <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
+                            <Link className='text-dark text-decoration-none d-block' type='link' onClick={(e) => {
+                              e.preventDefault();
+                              handleCategoryClick(item.nombre_categoria);
+                            }}>
+                              <span>{item.nombre_categoria}</span>
+                            </Link>
+                          </List.Item>
+                        )}/>
+                      </Card>
+                    </div>
                   </Col>
                 </Row>
               </Content>

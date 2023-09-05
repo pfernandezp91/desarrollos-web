@@ -1,5 +1,6 @@
 import { Col, Image, Layout, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // import Header from '../components/Header';
 // import Footer from '../components/Footer';
 import Loader from '../components/Loader';
@@ -29,9 +30,9 @@ function Home() {
               {/* Contenido principal de la aplicación */}
               <Row>
                 <Col span={8} style={{ textAlign: 'center', marginBottom: 20 }}>
-                  <a href='/blog'>
+                  <Link type='link' to={'/blog'}>
                     <Image width={200} height={200} src="https://dummyimage.com/200x200/000/fff" preview={false} style={{ borderRadius: '15px' }} alt=""/>
-                  </a>
+                  </Link>
                   <p style={{ marginTop: 5 }}>PISBlog</p>
                 </Col>
               </Row>

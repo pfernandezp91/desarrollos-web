@@ -4,26 +4,62 @@ import {
 import { Button, Card, Col, Layout, List, Row, Tag } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 // import Footer from '../components/Footer';
 // import Header from '../components/Header';
 import Loader from '../components/Loader';
+import { getCurrentToken, saveToken } from "../utils/LocalStorage";
 import './blog.css';
 
 const { Content } = Layout;
 
 function formatearFecha(fecha) {
+  if (typeof fecha !== 'string') {
+    console.error("La fecha proporcionada no es una cadena:", fecha);
+    return fecha;
+  }
+  if (!fecha.includes('/')) {
+    console.error("El formato de fecha no es correcto:", fecha);
+    return fecha;
+  }
   return fecha.split('/').map(part => part.length === 1 ? '0' + part : part).join('/');
 }
 
+
 function BlogPost() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get('token');
   const [dataBlog, setData] = useState([]);
   const [dataCategorias, setDataCategorias] = useState([]);
+  const [accessToken, setAccessToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  var copyToken = getCurrentToken();
 
   useEffect(() => {
+    if (token !== null) {
+      saveToken(token);
+    }
+
+    var newToken = getCurrentToken();
+
+    axios.get('/assets/api/token.php', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + newToken
+      }
+    })
+    .then(response => {
+      setAccessToken(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error);
+      setLoading(false);
+    });
+
     axios.get('/assets/api/blog.php')
       .then(response => {
         setData(response.data);
@@ -43,7 +79,16 @@ function BlogPost() {
         setError(error);
         setLoading(false);
       });
-  }, []);
+  }, [token]);
+
+  var AccessSuccessful = false
+  if(
+    (accessToken !== null && accessToken.acceso && accessToken.token.idRolApp === '1' && accessToken.token.idApp === '140') 
+    || 
+    (accessToken !== null && accessToken.acceso && accessToken.token.idRolApp === '2' && accessToken.token.idApp === '140')
+  ) {
+      AccessSuccessful = true;
+  }
 
   const currentIndex = dataBlog.findIndex(post => post.id === id);
   const previousIndex = currentIndex > 0 ? currentIndex - 1 : dataBlog.length - 1;
@@ -71,7 +116,8 @@ function BlogPost() {
     }
   };
 
-  const postSeleccionado = dataBlog.find(post => post.id === id);
+  const postSeleccionado = dataBlog?.find(post => post.id === id) || {};
+
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
@@ -130,20 +176,27 @@ function BlogPost() {
                     </div>
                   </Col>
                   <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
-                    <Card className='shadow' title="Categorías" style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
-                      <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                          <a className='text-dark text-decoration-none d-block' href={'/blog?category=Todas'}>
-                            <span>Todas</span>
-                          </a>
-                      </List.Item>
-                      <List dataSource={dataCategorias} renderItem={item => (
+                    <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
+                      {AccessSuccessful && (
+                        <Link to={ window.location.origin + '/admin/src/views/?token=' + copyToken } target="_blank" rel="noopener noreferrer">
+                          <Button className='w-100 mb-4' type='primary'>Administración</Button>
+                        </Link>
+                      )}
+                      <Card className='shadow' title="Categorías">
                         <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                          <a className='text-dark text-decoration-none d-block' href={'/blog?category=' + item.nombre_categoria}>
-                            <span>{item.nombre_categoria}</span>
-                          </a>
+                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/blog?category=Todas'}>
+                              <span>Todas</span>
+                            </Link>
                         </List.Item>
-                      )}/>
-                    </Card>
+                        <List dataSource={dataCategorias} renderItem={item => (
+                          <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
+                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/blog?category=' + item.nombre_categoria}>
+                              <span>{item.nombre_categoria}</span>
+                            </Link>
+                          </List.Item>
+                        )}/>
+                      </Card>
+                    </div>
                   </Col>
                 </Row>
               </Content>
