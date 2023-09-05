@@ -35,7 +35,7 @@ function App() {
   console.log(routes);
 
   return (
-    <Router>
+    <Router basename='/PISblog'>
       <div className="App">
         <Routes>
           {routes.map((route, index) => (
