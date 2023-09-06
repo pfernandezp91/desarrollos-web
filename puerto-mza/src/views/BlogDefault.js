@@ -35,7 +35,7 @@ function trimText(htmlString) {
 
 // const miToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp2YWxlbnp1ZWxhMUB1Y29sLm14IiwiaWRVc3UiOiIzOTE4IiwiaWRBcHAiOiIxNDAiLCJub21BcHAiOiJQSVMgQmxvZyIsImlkUm9sIjoiNiIsImlkUm9sQXBwIjoiMSIsImlkUGVyc29uYSI6IjMyMTEyIiwiaWRFbXByZXNhIjoiODUiLCJpZENvbnRyYXRvIjoiMSIsImlkQVBJIjoiNyIsImF1dG9yaWRhZCI6IjEiLCJodXNvIjoiQW1lcmljYS9NZXhpY29fQ2l0eSIsImh1c28yIjoiNiIsIm5iZiI6MTY5MzU4Mzg1NywiZXhwIjoxNjkzNjEyNjU3LCJpYXQiOjE2OTM1ODM4NTcsImlzcyI6IlBJUyIsImF1ZCI6IkFQSU1BTiJ9.7wV5HnrF3B6H1L-zapAimCq3vnwXvzWJWzcFAoAM5sM';
 
-function Blog() {
+function BlogDefault() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
@@ -103,7 +103,7 @@ function Blog() {
       AccessSuccessful = true;
   }
 
-  console.log(AccessSuccessful)
+  // console.log(AccessSuccessful)
   // if(accessToken) console.log(accessToken)
 
   const copyToClipboard = (text) => {
@@ -174,9 +174,9 @@ function Blog() {
                           </Col>
                           <Col span={4}>
                             <div className="d-flex align-items-center justify-content-end">
-                              <Link type='link' to={'/blog/post/' + item.id} onClick={(e) => {
+                              <Link type='link' to={'#nota' + item.id} onClick={(e) => {
                                   e.preventDefault();
-                                  const urlToCopy = window.location.origin + '/blog/post/' + item.id;
+                                  const urlToCopy = window.location.origin + '/#nota' + item.id;
                                   copyToClipboard(urlToCopy);
                                 }}>
                                 <ShareAltOutlined className="me-1" style={{ fontSize: 24, float: 'right' }}/>
@@ -189,7 +189,7 @@ function Blog() {
                               <Tag className='shadow shadow-danger' color="danger" style={{ backgroundColor: '#ef4444' }}>{item.categoria}</Tag>
                           </div>
                           <h3 className="h4">
-                            <Link className='text-dark text-decoration-none' type='link' to={'/blog/post/' + item.id}>
+                            <Link className='text-dark text-decoration-none' type='link' to={'#nota' + item.id}>
                               {item.titulo_pagina}
                             </Link>
                           </h3>
@@ -250,4 +250,4 @@ function Blog() {
   );
 }
 
-export default Blog;
+export default BlogDefault;

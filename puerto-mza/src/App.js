@@ -16,12 +16,7 @@ function App() {
 
     // Si es un post individual del blog, asignamos la ruta con el ID
     if (path === 'BlogPost') {
-      return { path: 'Blog/post/:id', component };
-    }
-
-    // Si es Blog, asignamos la ruta raíz
-    if (path === 'Blog') {
-      return { path: 'Blog', component };
+      return { path: '#nota:id', component };
     }
     
     // Si es Error404, asignamos la ruta comodín

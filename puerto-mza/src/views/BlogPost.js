@@ -12,6 +12,9 @@ import Loader from '../components/Loader';
 import { getCurrentToken, saveToken } from "../utils/LocalStorage";
 import './blog.css';
 
+const hash = window.location.hash;
+const notaId = hash.replace('#nota', '');
+
 const { Content } = Layout;
 
 function formatearFecha(fecha) {
@@ -26,7 +29,6 @@ function formatearFecha(fecha) {
   return fecha.split('/').map(part => part.length === 1 ? '0' + part : part).join('/');
 }
 
-
 function BlogPost() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -36,9 +38,7 @@ function BlogPost() {
   const [accessToken, setAccessToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams();
   var copyToken = getCurrentToken();
-  const imagePath = `${config.basename}/assets/img/hamburg-3763443_1280.jpg`;
   const apiToken = `${config.apiBaseUrl}`;
 
   useEffect(() => {
@@ -93,15 +93,15 @@ function BlogPost() {
       AccessSuccessful = true;
   }
 
-  const currentIndex = dataBlog.findIndex(post => post.id === id);
+  const currentIndex = dataBlog.findIndex(post => post.id === notaId);
   const previousIndex = currentIndex > 0 ? currentIndex - 1 : dataBlog.length - 1;
   const nextIndex = currentIndex < dataBlog.length - 1 ? currentIndex + 1 : 0;
   const isFirstElement = currentIndex === 0;
   const isLastElement = currentIndex === dataBlog.length - 1;
 
 
-  const previousPostId = dataBlog[previousIndex]?.id;
-  const nextPostId = dataBlog[nextIndex]?.id;
+  const previousPostId = dataBlog[previousIndex]?.notaId;
+  const nextPostId = dataBlog[nextIndex]?.notaId;
 
   const navigate = useNavigate();
 
@@ -119,7 +119,7 @@ function BlogPost() {
     }
   };
 
-  const postSeleccionado = dataBlog?.find(post => post.id === id) || {};
+  const postSeleccionado = dataBlog?.find(post => post.id === notaId) || {};
 
 
   if (loading) return <Loader />;
@@ -187,13 +187,13 @@ function BlogPost() {
                       )}
                       <Card className='shadow' title="Categorías">
                         <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/blog?category=Todas'}>
+                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/?category=Todas'}>
                               <span>Todas</span>
                             </Link>
                         </List.Item>
                         <List dataSource={dataCategorias} renderItem={item => (
                           <List.Item className='mb-2 py-2' style={{ marginBottom: '8px', border: 0 }}>
-                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/blog?category=' + item.nombre_categoria}>
+                            <Link className='text-dark text-decoration-none d-block' type='link' to={'/?category=' + item.nombre_categoria}>
                               <span>{item.nombre_categoria}</span>
                             </Link>
                           </List.Item>
