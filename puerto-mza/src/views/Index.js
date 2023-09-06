@@ -172,7 +172,7 @@ function BlogDefault() {
   return (
     <Layout className="layout">
       {/* <Header /> */}
-        {!hashContain && (
+        {!hashContain && !loading && (
           <>
             <section className="text-light bg-dark position-relative overflow-hidden">
               <div className="container position-relative py-3" style={{ zIndex: 1 }}>
@@ -290,7 +290,7 @@ function BlogDefault() {
             }
           </>
         )}
-        {hashContain && (
+        {hashContain && !loading && (
           <>
             <section className="pt-2 mb-5">
               <div className="container">
@@ -307,7 +307,7 @@ function BlogDefault() {
                             <div className="d-flex align-items-center me-3">
                               <div className="text-muted mx-auto mt-4">
                                 <span className='me-2'>{postSeleccionado.tipoNota} |</span>
-                                <span className='ms-auto'>{formatearFecha(postSeleccionado.fecha)}</span>
+                                <span className='ms-auto'>{postSeleccionado.fecha != undefined ? formatearFecha(postSeleccionado.fecha) : postSeleccionado.fecha}</span>
                               </div>
                             </div>
                           </div>
@@ -332,7 +332,7 @@ function BlogDefault() {
                           <ArrowLeftOutlined className="h4" />
                         </Button>
                               
-                        <Button id="volver_inicio" type="link" href="/blog" style={{ height: 'auto' }}>
+                        <Button id="volver_inicio" type="link" href="/" style={{ height: 'auto' }}>
                           <HomeOutlined className="h4"/>
                         </Button>
                               
@@ -354,9 +354,7 @@ function BlogDefault() {
                                 e.preventDefault();
                                 handleCategoryClick('Todas');
                                 // Elimina el fragmento (hash) de la URL sin redireccionar
-                                if (window.history && window.history.replaceState) {
-                                  window.history.replaceState(null, null, window.location.pathname);
-                                }
+                                window.location.hash = '';
                               }}>
                                 <span>Todas</span>
                             </Link>
@@ -367,9 +365,7 @@ function BlogDefault() {
                                 e.preventDefault();
                                 handleCategoryClick(item.nombre_categoria);
                                 // Elimina el fragmento (hash) de la URL sin redireccionar
-                                if (window.history && window.history.replaceState) {
-                                  window.history.replaceState(null, null, window.location.pathname);
-                                }
+                                window.location.hash = '';
                               }}>
                                 <span>{item.nombre_categoria}</span>
                               </Link>
