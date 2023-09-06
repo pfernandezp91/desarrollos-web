@@ -106,12 +106,15 @@ function BlogDefault() {
       AccessSuccessful = true;
   }
 
+  var postSeleccionado = {};
+
   // Función para cargar el contenido basado en el hash
   var hashContain = false;
   function loadContentFromHash() {
     const hash = window.location.hash;
     if (hash.startsWith('#nota')) {
       hashContain = true;
+      postSeleccionado = dataBlog?.find(post => post.id === notaId) || {};
     } else { 
       hashContain = false;
     }
@@ -162,8 +165,6 @@ function BlogDefault() {
       window.scrollTo(0, 0);  // Esto desplaza la página al principio.
     }
   };
-
-  const postSeleccionado = dataBlog?.find(post => post.id === notaId) || {};
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
