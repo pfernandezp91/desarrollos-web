@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DividerVector from '../components/DividerVector';
 import Loader from '../components/Loader';
-import { getCurrentToken, saveToken } from "../utils/LocalStorage";
 import config from '../utils/config';
+var copyToken = '';
 
 const { Content } = Layout;
 
@@ -16,18 +16,18 @@ function formatearFecha(fecha) {
   return fecha.split('/').map(part => part.length === 1 ? '0' + part : part).join('/');
 }
 
-function trimText(htmlString) {
-  const dummyElement = document.createElement('div');
-  dummyElement.innerHTML = htmlString;
+// function trimText(htmlString) {
+//   const dummyElement = document.createElement('div');
+//   dummyElement.innerHTML = htmlString;
   
-  let texto = dummyElement.textContent || dummyElement.innerText || "";
+//   let texto = dummyElement.textContent || dummyElement.innerText || "";
 
-  if (texto.length > 250) {
-    texto = texto.substr(0, 250) + '...';
-  }
+//   if (texto.length > 250) {
+//     texto = texto.substr(0, 250) + '...';
+//   }
 
-  return texto;
-}
+//   return texto;
+// }
 
 function Blog() {
   const hash = window.location.hash;
@@ -49,31 +49,28 @@ function Blog() {
   const apiToken = `${config.apiBaseUrl}`;
   const baseUrl = `${config.basename}`;
   const adminUrl = `${config.basename_admin}`;
-  
-  var copyToken = getCurrentToken();
-  
+
   useEffect(() => {
+    
     // Si el token es diferente de null, se guarda en el local storage
     if (token !== null) {
-      saveToken(token);
+      axios.get(`${apiToken}token.php`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        // !!!IMPORTANTE: comentar en pruebas locales (localhost) para evitar errores de CORS policy en el navegador (Chrome)!!!
+        withCredentials: true // Habilita las credenciales CORS 
+      })
+      .then(response => {
+        // saveToken(token);
+        copyToken = token;
+        setAccessToken(response.data);
+      })
+      .catch(error => {
+        // setError(error);
+      });
     }
-
-    // Obtener el token actual del local storage y guardarlo en una variable
-    var newToken = getCurrentToken();
-
-    // Crear promesas para las dos peticiones
-    axios.get(`${apiToken}/token.php`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + newToken
-      }
-    })
-    .then(response => {
-      setAccessToken(response.data);
-    })
-    .catch(error => {
-      setError(error);
-    });
     
     const fetchCategoriasPromise = axios.get(`${apiToken}src/server/blog_categorias.php`);
     const fetchDataPromise = axios.get(`${apiToken}src/server/blog.php`);
@@ -246,7 +243,7 @@ function Blog() {
                           </Link>
                         </h3>
                         <hr className='hr-border'/>
-                        <p className="mb-4">{trimText(item.contenido)}</p>
+                        <div className="mb-4" dangerouslySetInnerHTML={{ __html: item.contenido }} />
                     </Card>
                   ))}
                 </Col>
