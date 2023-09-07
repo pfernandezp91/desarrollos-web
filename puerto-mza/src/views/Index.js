@@ -48,6 +48,7 @@ function Blog() {
   const imagePath = `${config.basename}assets/img/hamburg-3763443_1280.jpg`;
   const apiToken = `${config.apiBaseUrl}`;
   const baseUrl = `${config.basename}`;
+  const adminUrl = `${config.basename_admin}`;
   
   var copyToken = getCurrentToken();
   
@@ -252,7 +253,7 @@ function Blog() {
                 <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                   <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                     {AccessSuccessful && (
-                      <Link to={ `${window.location.origin}${baseUrl}/admin/src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
+                      <Link to={ `${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
                         <Button className='w-100 mb-4' type='primary'>Administración</Button>
                       </Link>
                     )}
