@@ -5,6 +5,19 @@ body {
     /* padding-top: 58px; */
 }
 
+.titulo_text_PIS {
+    font-weight: 1000;
+    font-style: italic;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+.titulo_text_Blog {
+    font-style: italic;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 46px;
+}
+
 .container, .container-fluid {
     margin-right: auto;
     margin-left: auto;
@@ -197,4 +210,13 @@ hr {
         width: 1170px;
         max-width: 100%;
     }
+}
+
+@media (max-width: 575px) {
+    #cover {
+        padding-bottom: 20px!important;
+    }
+    #cover .divider {
+        display: none!important;
+    }   
 }

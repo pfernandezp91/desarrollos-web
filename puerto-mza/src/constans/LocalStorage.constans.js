@@ -1,1 +1,0 @@
-export const storageNameToken = `blogToken${process.env.ENV }`;
