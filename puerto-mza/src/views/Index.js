@@ -250,7 +250,7 @@ function Blog() {
                 <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                   <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                     {AccessSuccessful && (
-                      <Link to={ `${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
+                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
                         <Button className='w-100 mb-4' type='primary'>Administración</Button>
                       </Link>
                     )}
@@ -360,7 +360,7 @@ function Blog() {
                 <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                   <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                     {AccessSuccessful && (
-                      <Link to={ window.location.origin + '/admin/src/views/?token=' + copyToken } target="_blank" rel="noopener noreferrer">
+                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
                         <Button className='w-100 mb-4' type='primary'>Administración</Button>
                       </Link>
                     )}
