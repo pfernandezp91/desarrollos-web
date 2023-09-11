@@ -37,6 +37,7 @@ function Blog() {
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
   const token = queryParams.get('token');
+  console.log('token', token);
   const [copied, setCopied] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [dataBlog, setData] = useState([]);
@@ -72,8 +73,8 @@ function Blog() {
       });
     }
     
-    const fetchCategoriasPromise = axios.get(`${apiToken}src/server/blog_categorias.php`);
-    const fetchDataPromise = axios.get(`${apiToken}src/server/blog.php`);
+    const fetchCategoriasPromise = axios.get(`${apiToken}models/blog_categorias.php`);
+    const fetchDataPromise = axios.get(`${apiToken}models/blog.php`);
 
     // Usar Promise.all para esperar a que ambas promesas se resuelvan
     Promise.all([fetchCategoriasPromise, fetchDataPromise])
@@ -250,7 +251,7 @@ function Blog() {
                 <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                   <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                     {AccessSuccessful && (
-                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
+                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} rel="noopener noreferrer">
                         <Button className='w-100 mb-4' type='primary'>Administración</Button>
                       </Link>
                     )}
@@ -360,7 +361,7 @@ function Blog() {
                 <Col xs={{ span: 24 }} md={{ span: 8 }} className='px-4'>
                   <div style={{ marginBottom: '16px', position: 'sticky', top: 145 }}>
                     {AccessSuccessful && (
-                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} target="_blank" rel="noopener noreferrer">
+                      <Link to={`${window.location.origin}${adminUrl}src/views/?token=${copyToken}`} rel="noopener noreferrer">
                         <Button className='w-100 mb-4' type='primary'>Administración</Button>
                       </Link>
                     )}
