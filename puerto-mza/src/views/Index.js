@@ -55,7 +55,7 @@ function Blog() {
     
     // Si el token es diferente de null, se guarda en el local storage
     if (token !== null) {
-      axios.get(`${apiToken}models/token.php`, {
+      axios.get(`${apiToken}token.php`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
@@ -73,8 +73,8 @@ function Blog() {
       });
     }
     
-    const fetchCategoriasPromise = axios.get(`${apiToken}models/blog_categorias.php`);
-    const fetchDataPromise = axios.get(`${apiToken}models/blog.php`);
+    const fetchCategoriasPromise = axios.get(`${apiToken}blog_categorias.php`);
+    const fetchDataPromise = axios.get(`${apiToken}blog.php`);
 
     // Usar Promise.all para esperar a que ambas promesas se resuelvan
     Promise.all([fetchCategoriasPromise, fetchDataPromise])
