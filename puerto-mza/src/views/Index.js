@@ -55,7 +55,7 @@ function Blog() {
     
     // Si el token es diferente de null, se guarda en el local storage
     if (token !== null) {
-      axios.get(`${apiToken}token.php`, {
+      axios.get(`${apiToken}models/token.php`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
